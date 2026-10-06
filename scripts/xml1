@@ -1,0 +1,180 @@
+<interfaces xmlns="http://openconfig.net/yang/interfaces">
+ <interface>
+  <name>Ethernet1</name>
+   <config>
+    <description>uplink to core</description>
+   </config>
+  </name>
+ </interface>
+</interfaces>
+
+<network-instances xmlns="http://openconfig.net/yang/network-instance">
+    <network-instance>
+      <name>default</name>
+        <protocols>
+            <protocol>
+               <identifier>BGP</identifier> 
+               <name>bgp1</name>
+                <bgp>
+                  <global>
+                    <config>
+                        <as>65001</as>
+                    </config>
+                  </global>
+                </bgp>
+
+            </protocol>
+        </protocols>
+    </network-instance>
+</network-instances>
+
+
+<interfaces xmlns="http://openconfig.net/yang/interfaces">
+    <interface>
+        <name>Ethernet1</name>
+        <config>
+            <mtu>1500</mtu>
+        </config>
+    </interface>
+</interfaces>
+
+
+
+
+
+<network-instances xmlns="http://openconfig.net/yang/network-instance">
+    <network-instance>
+        <name>MGMT-VRF</name>
+        <protocols>
+            <protocol>
+                <identifier>STATIC</identifier>
+                <name>static-routes</name>
+                <static-routes>
+                    <static-route>
+                        <prefix>0.0.0.0/0</prefix>
+                        <next-hops>
+                            <next-hop>
+                                <index>10.0.0.1</index>
+                                <config>
+                                    <next-hop>10.0.0.1</next-hop>
+                                </config>
+                            </next-hop>
+                        </next-hops>
+                    </static-route>
+                </static-routes>
+            </protocol>
+        </protocols>
+    </network-instance>
+</network-instances>
+
+<interfaces xmlns="http://openconfig.net/yang/interfaces">
+    <interface>
+        <name>Ethernet1</name>
+        <subinterfaces>
+            <subinterface>
+                <index>100</index>
+                <config>
+                    <description>uplink VLAN</description>
+                </config>
+            </subinterface>
+        </subinterfaces>
+    </interface>
+</interfaces>
+
+<system xmlns="http://openconfig.net/yang/system">
+    
+    <config>
+        <hostname>router-01</hostname>
+    </config>
+    
+</system>
+
+
+<system xmlns="http://openconfig.net/yang/system">
+  <config>
+    <domain-name>lab.local</domain-name>
+  </config>
+</system>
+
+<interfaces xmlns="http://openconfig.net/yang/interfaces">
+  <interface>
+    <name>Loopback0</name>
+    <config>
+      <description>loopback for management</description>
+    </config>
+  </interface>
+</interfaces>
+
+<network-instance xmlns="http://openconfig.net/yang/network-instance">
+  <network-instances>
+    <network-instance>
+       <name>default</name>
+       <protocols>
+         <protocol>
+           <identifier>BGP</identifier>
+           <name>BGP</name>
+           <bgp>
+             <global>
+               <config>
+                 <as>65001</as>
+               </config>
+             </global>
+           </bgp>
+         </protocol>
+       </protocols>
+    </network-instance>
+  </network-instances>
+
+<system xmlns="http://openconfig.net/yang/system">
+  <system>
+    <dns-servers>
+      <server>
+        <address>8.8.8.8</address>
+        <config>
+          <address>8.8.8.8</address>
+        </config>
+      </server>
+    </dns-servers>
+  </system>
+</system>
+
+
+<interfaces xmlns="http://openconfig.net/yang/interfaces">
+   <interface>
+     <name>GigabitEthernet</name>
+     <subinterfaces>
+        <subinterface>
+          <index>200</index>
+          <config>
+             <description>voice VLAN</description>
+          </config>
+        </subinterface>
+     </subinterfaces>
+   </interface>
+</interfaces>
+
+
+<network-instance xmlns="http://openconfig.net/yang/network-instance">
+  <network-instances>
+    <network-instance>
+      <name>PROD-VRF</name>
+      <protocols>
+        <protocol>
+          <identifier>BGP</identifier>
+          <name>bgp-prod</name>
+          <bgp>
+            <neighbors>
+              <neighbor>
+                <neighbor-address>192.168.1.1</neighbor-address>
+                <config>
+                  <description>BGP peer to edge-router-01</description>
+                </config>
+              </neighbor>
+            </neighbors>
+          </bgp>
+        </protocol>
+      </protocols>
+    </network-instance>
+  </network-instances>
+</network-instance>
+
