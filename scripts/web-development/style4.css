@@ -1,0 +1,174 @@
+
+@import url('https://googleapis.com');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #1a2b4a;
+    --secondary: #ffb400;
+    --tertiary: white;
+    --tertiary2: #222;
+    
+    --radius: 8px;
+	--radius2: 15px;
+
+    --space-margin: 12px;
+    --space-pad: 8px;
+	--space-pad1: 15px;
+    --space-char: 1px;
+    --space-char2: 8px;
+
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+	background-color: transparent ;
+	border-radius: var(--radius2);
+	padding: var(--space-pad1);
+	margin: var(--space-margin);
+	box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.3);
+	gap: 100px;
+	width: 90vw;
+    
+}
+
+@media (max-width: 768px) {
+	.navbar {
+		gap: 20px;
+	}
+	
+	body {
+		line-height: 1.2;
+		letter-spacing: 0.8px;
+		background-color:#333;
+		
+	}
+	
+	.navbar .menu-toggle {
+		display: flex;
+		flex-direction: column;
+		width: 40px;
+		height:20px;
+		justify-content: space-between;
+		border: none;
+		background: transparent;
+		cursor: pointer;
+		
+	}
+	
+	.navbar .menu-toggle .bar {
+		width: 100%;
+        height: 3px;
+        background-color: black;
+        border-radius: 2px;
+	}
+	
+	.navbar .nav-links {
+		display:none;
+		position: absolute;
+		top:60px;
+		left:0;
+		width:100%;
+		padding:20px;
+		text-align:center;
+		flex-direction:column;
+	}
+	
+	
+}
+
+h1,h2 {
+	font-family: 'Playfair Display';
+	color: red;
+	
+}
+
+h1 {
+	color: blue;
+}
+
+.navbar ul a {
+	color: var(--secondary);
+	padding: var(--space-pad);
+	text-align: center;
+	justify-content: center;
+	
+}
+
+.navbar ul a:hover {
+	color: red;
+}
+
+.nav-links {
+	color: white;
+	padding: var(--space-pad);
+	text-align: center;
+	justify-content: center;
+	display: block;
+}
+
+body {
+	margin: var(--space-margin);
+	padding: var(--space-pad);
+	border-radius: var(--radius);
+	line-height: 1.6;
+	letter-spacing: var(--space-char);
+	background-color: #333;
+	background-image:linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('https://picsum.photos/1920/1080');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	background-attachment: fixed;
+	width: 90vw;
+	height: 100vh;
+	
+	
+	
+}
+
+.menu-toggle {
+	display: flex;
+	width: 25px;
+	height: 18px;
+	
+}
+
+.mn {
+	background-color: transparent;
+	padding: var(--space-pad);
+	border-radius: var(--radius);
+	margin: var(--space-margin);
+	color: white;
+}
+
+.mn ul {
+	justify-content: center-left;
+	padding: var(--space-pad);
+	text-align: center-left;
+	padding-left: 40px;
+	
+}
+
+footer {
+	background-color: var(--tertiary2);
+	color: white;
+	text-decoration: underline;
+	border-radius: 20px;
+	text-align: center;
+}
+
+.img {
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	padding: var(--space-pad);
+}
+
