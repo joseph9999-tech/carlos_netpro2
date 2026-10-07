@@ -1,5 +1,6 @@
 from ncclient import manager
 from ncclient.operations import RPCError
+import re
 
 device = {
     "host": "sandbox-router",
@@ -144,7 +145,7 @@ ntp_global_filter = """
 
 with manager.connect(**device) as m:
   try:
-    response = m.edit_config(target="candidate", config=ntp_payload)
+    response = m.edit_config(target="candidate", config=ntp_global_payload)
     print("edit ok!")
     
   except RPCError as e:
@@ -164,7 +165,7 @@ with manager.connect(**device) as m:
         raise SystemExit(1)
 
   try:
-     resp2 = m.edit_config(target="candidate", config=ntp2_payload)
+     resp2 = m.edit_config(target="candidate", config=ntp_server_payload)
      print("edit ok!")
   except RPCError as e:
      print(f"error {e.tag} occurred!!")
@@ -178,9 +179,54 @@ with manager.connect(**device) as m:
        print(f"error-body: {e.message}")
 
   print("verifying configurations.......")
-  resp1 = m.get_config(source="running", filter=ntp_verify_payload)
+  resp1 = m.get_config(source="running", filter=ntp_global_filter)
   print(resp1)
 
-  resp4 = m.get_config(source="running", filter=ntp2_verify_payload)
+  resp4 = m.get_config(source="running", filter=ntp_server_filter)
   print(resp4)
+
+
+## checking modules supported by a network device
+modules = []
+caps = m.server_capabilities
+for cap in caps:
+   
+
+   match = re.search('module=([^&]*)', cap) #or 'module=(.*)', cap
+   #e.search('openconfig(.*)', cap) for openconfig details
+   if match:
+    modules.append(match.group(1))
+
+for m in modules:
+   print(m)
+
+## checking for candidate and openconfig
+
+caps = m.server_capabilities
+if "candidate" in caps:
+  
+   
+    print("you can write in candidate")
+else:
+      print("no candidate")
+
+all_caps = "".join(caps)
+
+if "candidate" in all_caps:
+    print("You can write in candidate!")
+else:
+    print("No candidate datastore available.")
+    
+
+if "openconfig" in all_caps:
+   print("openconfig supported!!")
+
+if any("candidate" in cap for cap in caps):
+    print("You can write in candidate!")
+else:
+    print("No candidate datastore available.")
+    
+
+if any("openconfig" in cap for cap in caps):
+   print("openconfig supported!!")
 
